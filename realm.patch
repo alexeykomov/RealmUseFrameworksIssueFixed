@@ -1,0 +1,25 @@
+11,15c11,20
+< begin
+<   podfile = File.read(podfile_path)
+<   uses_frameworks = podfile.scan(/\n\s*use_frameworks!\n/).any?
+< rescue
+<   uses_frameworks = false
+---
+> 
+> if !ENV['REALM_USE_FRAMEWORKS'].present?
+>   begin
+>     podfile = File.read(podfile_path)
+>     uses_frameworks = podfile.scan(/\n\s*use_frameworks!\n/).any?
+>   rescue
+>     uses_frameworks = false
+>   end
+> else
+>   uses_frameworks = ENV['REALM_USE_FRAMEWORKS'] == 'true' ? true : false
+60c65
+<   
+---
+> 
+90c95
+<   
+---
+> 
